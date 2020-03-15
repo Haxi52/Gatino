@@ -1,0 +1,20 @@
+{
+  "Gatino": {
+    "commandName": "Project",
+    "launchBrowser": true,
+    "applicationUrl": "https://localhost:5001",
+    "environmentVariables": {
+      "ASPNETCORE_ENVIRONMENT": "Development"
+    }
+  },
+  "profiles": {
+    "Gatino": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true
+    }
+  }
+}

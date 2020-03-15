@@ -1,0 +1,79 @@
+﻿@model Gatino.Web.Models.Topic.TopicModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div data-display="view">
+            @if (Model.Data is null)
+            {
+                <h3>Topic does not exist</h3>
+                <button class="btn btn-outline-success" id="createButton">Create</button>
+            }
+            else
+            {
+                <span id="topicData">
+                    @Html.Raw(Model.Data)
+                </span>
+                <div class="text-right mt-2">
+                    <button class="btn btn-outline-success" id="editButton">Edit</button>
+                </div>
+            }
+        </div>
+        <div data-display="edit" style="display: none;">
+            <form method="post">
+                <input asp-for="Path" type="hidden" />
+                <input asp-for="Name" type="hidden" />
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <textarea id="@Html.IdFor(i=>i.Data)" name="@Html.NameFor(i => i.Data)"></textarea>
+                    </div>
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-secondary" onclick="location.reload(); return false;">Cancel</button>
+                        <button type="submit" class="btn btn-primary ml-2">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/3.1.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/3.1.0/css/plugins/image.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/3.1.0/js/froala_editor.pkgd.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/3.1.0/js/plugins/image.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#createButton').click(function () {
+                editMode();
+            });
+
+            $('#editButton').click(function () {
+                editMode();
+            });
+
+        });
+
+        function editMode() {
+
+            var editorId = '#@(Html.IdFor(i => i.Data))';
+            $(editorId).html($('#topicData').html());
+            var editor = new FroalaEditor(editorId, {
+                imageUploadURL: '@(Url.Action("upload", "media"))',
+                imageUploadParam: 'files',
+                imageUploadParams: {
+                    path: '@Model.Path',
+                },
+            });
+
+            $('[data-display="view"]').hide();
+            $('[data-display="edit"]').show();
+        }
+    </script>
+
+}
