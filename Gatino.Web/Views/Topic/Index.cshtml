@@ -65,7 +65,7 @@
             $(editorId).html($('#topicData').html());
             var editor = new FroalaEditor(editorId, {
                 imageUploadURL: '@(Url.Action("upload", "media"))',
-                imageUploadParam: 'files',
+                imageUploadParam: 'file',
                 imageUploadParams: {
                     path: '@Model.Path',
                 },

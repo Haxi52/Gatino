@@ -14,6 +14,7 @@ namespace Gatino.Web.Data
         private readonly IHttpContextAccessor httpContextAccessor;
 
         public DbSet<Entities.Topic> Topics { get; set; }
+        public DbSet<Entities.Media> Media { get; set; }
 
 
         public DbContext(DbContextOptions options) : base(options)

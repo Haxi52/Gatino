@@ -9,6 +9,8 @@ namespace Gatino.Web.Data
     public interface IDbContext
     {
         DbSet<Topic> Topics { get; set; }
+        DbSet<Media> Media { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
